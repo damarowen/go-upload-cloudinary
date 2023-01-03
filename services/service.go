@@ -1,10 +1,12 @@
 package services
 
 import (
-    "echo-cloudinary-api/helper"
-    "echo-cloudinary-api/models"
+	"echo-cloudinary-api/helper"
+	"echo-cloudinary-api/models"
+	"errors"
+	"fmt"
 
-    "github.com/go-playground/validator/v10"
+	"github.com/go-playground/validator/v10"
 )
 var (
     validate = validator.New()
@@ -45,8 +47,10 @@ func (*media) RemoteUpload(url models.Url) (string, error) {
 
     //upload
     uploadUrl, errUrl := helper.ImageUploadHelper(url.Url)
-    if errUrl != nil {
-        return "", err
+    if errUrl != nil  || uploadUrl == ""{
+        return "", errors.New("something error")
     }
+
+    fmt.Println(uploadUrl)
     return uploadUrl, nil
 }

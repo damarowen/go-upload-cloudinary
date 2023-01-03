@@ -1,12 +1,13 @@
 package helper
 
 import (
-    "context"
-    config "echo-cloudinary-api/configs"
-    "time"
+	"context"
+	config "echo-cloudinary-api/configs"
+	"fmt"
+	"time"
 
-    "github.com/cloudinary/cloudinary-go"
-    "github.com/cloudinary/cloudinary-go/api/uploader"
+	"github.com/cloudinary/cloudinary-go"
+	"github.com/cloudinary/cloudinary-go/api/uploader"
 )
 
 func ImageUploadHelper(input interface{}) (string, error) {
@@ -25,5 +26,6 @@ func ImageUploadHelper(input interface{}) (string, error) {
     if err != nil {
         return "", err
     }
+    fmt.Println(uploadParam)
     return uploadParam.SecureURL, nil
 }
